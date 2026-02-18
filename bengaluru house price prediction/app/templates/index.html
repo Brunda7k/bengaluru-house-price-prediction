@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bengaluru Home Price Prediction</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="form-container">
+            <h1>Bengaluru Home Price Predictor</h1>
+            <form action="/predict" method="post" id="priceForm">
+                <label for="location">Select Location:</label>
+                <select name="location" id="location" required>
+                    <option value="" disabled selected>Select a city</option>
+                    {% for loc in locations %}
+                        <option value="{{ loc }}">{{ loc.title() }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="sqft">Total Square Feet:</label>
+                <input type="number" name="sqft" id="sqft" required>
+
+                <label for="bath">Bathrooms:</label>
+                <input type="number" name="bath" id="bath" required>
+
+                <label for="bhk">BHK:</label>
+                <input type="number" name="bhk" id="bhk" required>
+
+                <button type="submit">Predict Price</button>
+            </form>
+
+            {% if predicted_price %}
+            <div class="result">
+                <h2>Predicted Price: ₹{{ predicted_price }} Lakhs</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
